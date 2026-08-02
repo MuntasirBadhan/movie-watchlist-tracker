@@ -257,7 +257,7 @@ async function handleFormSubmit(e) {
     const json = await res.json();
 
     if (json.success) {
-      showFormMessage(`"${payload.movie_name}" added to your watchlist! 🎉`, 'success');
+      showFormMessage(`"${payload.movie_name}" was successfully added to your watchlist! 🎬`, 'success');
       movieForm.reset();
       // Uncheck all checkboxes (reset() doesn't always do it reliably)
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => (cb.checked = false));
@@ -299,7 +299,7 @@ async function handleDelete(id) {
     else alert(json.message || 'Failed to delete movie.');
   } catch (err) {
     console.error('handleDelete error:', err);
-    alert('Network error. Is the server running?');
+    alert('Network error. Is the server running?Please try again later.');
   } finally {
     hideLoader();
   }
