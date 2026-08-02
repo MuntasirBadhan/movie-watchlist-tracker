@@ -257,7 +257,7 @@ async function handleFormSubmit(e) {
     const json = await res.json();
 
     if (json.success) {
-      showFormMessage(`"${payload.movie_name}" was successfully added to your watchlist! 🎬`, 'success');
+      showFormMessage(`"${payload.movie_name}" added successfully from main branch! ✅`, 'success');
       movieForm.reset();
       // Uncheck all checkboxes (reset() doesn't always do it reliably)
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => (cb.checked = false));
