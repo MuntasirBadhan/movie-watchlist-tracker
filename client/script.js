@@ -283,7 +283,7 @@ async function handleMarkWatched(id) {
     else alert(json.message || 'Failed to update movie.');
   } catch (err) {
     console.error('handleMarkWatched error:', err);
-    alert('Network error. Is the server running?');
+    alert('Network error. changes from partho br');
   } finally {
     hideLoader();
   }
