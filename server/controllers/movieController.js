@@ -72,7 +72,7 @@ const deleteMovie = async (req, res) => {
     res.json({ success: true, message: 'Movie deleted successfully.' });
   } catch (err) {
     console.error('deleteMovie error:', err);
-    res.status(500).json({ success: false, message: 'Failed to delete movie.' });
+    res.status(500).json({ success: false, message: 'FAILED TO DELETE MOVIE.' });
   }
 };
 
