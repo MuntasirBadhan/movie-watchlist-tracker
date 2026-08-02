@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Movie Watchlist Tracker – Keep track of movies you plan to watch and movies you have already watched." />
+  <title>🎬 Movie Watchlist Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🎬</span>
+        <div>
+          <h1 class="logo-title">Movie Watchlist</h1>
+          <p class="logo-sub">Track · Plan · Discover</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-pill" id="stat-watch-later">
+          <span class="stat-num" id="count-watch-later">0</span>
+          <span class="stat-label">To Watch</span>
+        </div>
+        <div class="stat-pill watched-pill" id="stat-watched">
+          <span class="stat-num" id="count-watched">0</span>
+          <span class="stat-label">Watched</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1 — ADD MOVIE FORM
+    ═══════════════════════════════════════════════ -->
+    <section class="section form-section" id="section-add">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon">➕</span>Add a Movie
+        </h2>
+        <p class="section-desc">Fill in the details below and hit <em>Save Movie</em>.</p>
+      </div>
+
+      <form id="movie-form" novalidate>
+
+        <!-- Movie Name -->
+        <div class="form-group">
+          <label class="form-label" for="movie-name">
+            Movie Name <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="movie-name"
+            name="movie_name"
+            class="form-input"
+            placeholder="e.g. Inception"
+            maxlength="255"
+            required
+          />
+          <span class="form-error" id="err-name"></span>
+        </div>
+
+        <!-- Categories -->
+        <div class="form-group">
+          <label class="form-label">
+            Categories <span class="required">*</span>
+          </label>
+          <div class="checkbox-grid" id="categories-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Adventure" id="cat-adventure" />
+              <span class="checkbox-custom"></span>Adventure
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Romantic" id="cat-romantic" />
+              <span class="checkbox-custom"></span>Romantic
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Comedy" id="cat-comedy" />
+              <span class="checkbox-custom"></span>Comedy
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Action" id="cat-action" />
+              <span class="checkbox-custom"></span>Action
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Sci-Fi" id="cat-scifi" />
+              <span class="checkbox-custom"></span>Sci-Fi
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="Others" id="cat-others" />
+              <span class="checkbox-custom"></span>Others
+            </label>
+          </div>
+          <span class="form-error" id="err-categories"></span>
+        </div>
+
+        <!-- Languages -->
+        <div class="form-group">
+          <label class="form-label">
+            Languages <span class="required">*</span>
+          </label>
+          <div class="checkbox-grid" id="languages-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="English" id="lang-english" />
+              <span class="checkbox-custom"></span>English
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="Bengali" id="lang-bengali" />
+              <span class="checkbox-custom"></span>Bengali
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="Hindi" id="lang-hindi" />
+              <span class="checkbox-custom"></span>Hindi
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="Malayalam" id="lang-malayalam" />
+              <span class="checkbox-custom"></span>Malayalam
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="French" id="lang-french" />
+              <span class="checkbox-custom"></span>French
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="Korean" id="lang-korean" />
+              <span class="checkbox-custom"></span>Korean
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="languages" value="Japanese" id="lang-japanese" />
+              <span class="checkbox-custom"></span>Japanese
+            </label>
+          </div>
+          <span class="form-error" id="err-languages"></span>
+        </div>
+
+        <!-- IMDb Rating + Schedule — side by side -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="imdb-rating">
+              IMDb Rating <span class="optional">(optional)</span>
+            </label>
+            <input
+              type="number"
+              id="imdb-rating"
+              name="imdb_rating"
+              class="form-input"
+              placeholder="0.0 – 10.0"
+              min="0"
+              max="10"
+              step="0.1"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scheduled-at">
+              Scheduled Watch Date &amp; Time <span class="optional">(optional)</span>
+            </label>
+            <input
+              type="datetime-local"
+              id="scheduled-at"
+              name="scheduled_at"
+              class="form-input"
+            />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="btn-save">
+            <span class="btn-icon">💾</span> Save Movie
+          </button>
+          <button type="reset" class="btn btn-ghost" id="btn-reset">Clear</button>
+        </div>
+
+        <!-- Global form message -->
+        <div class="form-message hidden" id="form-message" role="alert"></div>
+
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2 — WATCH LATER
+    ═══════════════════════════════════════════════ -->
+    <section class="section list-section" id="section-watch-later">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon">📋</span>Watch Later
+          <span class="badge" id="badge-watch-later">0</span>
+        </h2>
+        <p class="section-desc">Movies you plan to watch.</p>
+      </div>
+
+      <div class="movie-grid" id="watch-later-grid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="empty-state hidden" id="empty-watch-later">
+        <span class="empty-icon">🎞️</span>
+        <p>No movies in your watchlist yet. Add one above!</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3 — WATCHED MOVIES
+    ═══════════════════════════════════════════════ -->
+    <section class="section list-section watched-section" id="section-watched">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon">✅</span>Watched Movies
+          <span class="badge badge-watched" id="badge-watched">0</span>
+        </h2>
+        <p class="section-desc">Movies you have already seen.</p>
+      </div>
+
+      <div class="movie-grid" id="watched-grid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="empty-state hidden" id="empty-watched">
+        <span class="empty-icon">🏆</span>
+        <p>No watched movies yet. Mark one as watched to see it here!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Movie Watchlist Tracker &mdash; Built with Node.js · Express · MySQL · Vanilla JS</p>
+  </footer>
+
+  <!-- Loading overlay -->
+  <div class="loader-overlay hidden" id="loader-overlay">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
